@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "docker compose up"
+    "start": "docker compose up",
+    "deploy": "npx cubejs-cli deploy --upload-env --token 33fb1f663fa1d22f9fc9e17063ddf43a"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@cubejs-backend/server-core": "^0.33.49"
+  }
 }

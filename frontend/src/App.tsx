@@ -1,7 +1,8 @@
 import React from "react";
 import LoginButton from "./components/Login";
 import LogoutButton from "./components/Logout";
-import Profile from "./components/Profile";
+import Profilev2 from "./components/Profilev2";
+import CubeQuery from "./components/CubeQuery";
 // import { useState } from "react";
 
 // import reactLogo from "./assets/react.svg";
@@ -15,10 +16,14 @@ function App() {
     <>
       <div>
         <LoginButton />
-        <hr />
-        <Profile />
-        <hr />
         <LogoutButton />
+        <hr />
+        <Profilev2 />
+        <hr />
+        <hr />
+        <hr />
+        <CubeQuery />
+        <hr />
       </div>
     </>
   );
