@@ -36,9 +36,9 @@ export default function CubeQuery() {
     };
 
     const cubejsApi = cubejs(accessToken, {
-      //   apiUrl: "http://localhost:4000/cubejs-api/v1",
-      apiUrl:
-        "https://territorial-heron.aws-us-west-2-t-11709.cubecloudapp.dev/cubejs-api/v1",
+      apiUrl: "http://localhost:4000/cubejs-api/v1",
+      //   apiUrl:
+      //     "https://territorial-heron.aws-us-west-2-t-11709.cubecloudapp.dev/cubejs-api/v1",
     });
 
     const resultSet = await cubejsApi.load(query);
