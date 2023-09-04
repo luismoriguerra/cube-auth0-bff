@@ -6,7 +6,7 @@ services:
     ports:
       - 4000:4000
       - 15432:15432
-    environment:
-      - CUBEJS_DEV_MODE=true
+    # environment:
+    #   - CUBEJS_DEV_MODE=false
     volumes:
       - .:/cube/conf

@@ -5,6 +5,7 @@ cube(`activities`, {
     `,
 
   data_source: `default`,
+  public: true,
 
   joins: {},
 

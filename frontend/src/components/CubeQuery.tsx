@@ -11,11 +11,6 @@ export default function CubeQuery() {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [resultSet, setResultSet] = useState(null);
   const [count, setCount] = useState(0);
-  //   const [isLoading, setIsLoading] = useState(false);
-  //   const [error, setError] = useState(null);
-  //   const [progress, setProgress] = useState(null);
-  //   const [query, setQuery] = useState(null);
-  //   const [accessToken, setToken] = useState(null);
 
   async function fetchData() {
     const [err, accessToken] = await to(
@@ -27,21 +22,12 @@ export default function CubeQuery() {
       })
     );
 
-    const query = {
-      limit: 10,
-      dimensions: ["activities.organizationid"],
-      order: {
-        "activities.organizationid": "asc",
+    const resultSet = await fetch("http://localhost:3000/", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
       },
-    };
-
-    const cubejsApi = cubejs(accessToken, {
-      apiUrl: "http://localhost:4000/cubejs-api/v1",
-      //   apiUrl:
-      //     "https://territorial-heron.aws-us-west-2-t-11709.cubecloudapp.dev/cubejs-api/v1",
-    });
-
-    const resultSet = await cubejsApi.load(query);
+    }).then((res) => res.json());
 
     setResultSet(resultSet);
   }
@@ -56,17 +42,13 @@ export default function CubeQuery() {
 
   const maxHeight = 850;
 
-  const dataSource = resultSet?.tablePivot() || [];
-  const columns = resultSet?.tableColumns() || [];
-
   return (
     <div>
       cube query
       <button onClick={updateCount}>Fetch Data</button>
       <div></div>
       <br />
-      <h3>Total rows: {dataSource.length}</h3>
-      <Table columns={columns} dataSource={dataSource} />
+      {JSON.stringify(resultSet)}
     </div>
   );
 }
