@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "docker compose up",
-    "deploy": "npx cubejs-cli deploy --token 33fb1f663fa1d22f9fc9e17063ddf43a"
+    "deploy": "npx cubejs-cli deploy --token {token}"
   },
   "author": "",
   "license": "ISC",

@@ -29,6 +29,9 @@ export class AppController {
         role: 'anonymous',
       },
       CUBE_API_SECRET,
+      {
+        expiresIn: '1d',
+      },
     );
 
     return cubejsToken;

@@ -16,6 +16,8 @@ module.exports = {
   checkAuth: checkAuthMiddleware,
   queryRewrite: (query, context) => {
     logQuery(query, context);
+
+    trow
     return query;
   },
   contextToAppId: ({ securityContext }) => {

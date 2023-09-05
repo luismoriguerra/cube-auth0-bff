@@ -9,9 +9,12 @@ const checkVisibility =
       msg: ":::: checkVisibility role",
       debug: { cubeName, role, acl },
     });
+    
     return false;
   };
 
 module.exports = {
   checkVisibility,
 };
+
+// http://localhost:3000/meta
