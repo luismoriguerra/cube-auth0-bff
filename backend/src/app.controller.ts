@@ -1,16 +1,17 @@
 import { Controller, Get, Req } from '@nestjs/common';
 import { AppService } from './app.service';
-import cubejs from '@cubejs-client/core';
+import cubejs, { CubejsApi, Query } from '@cubejs-client/core';
 import { sign } from 'jsonwebtoken';
 
 @Controller()
 export class AppController {
-  cubejsApi: any;
+  cubejsApi: CubejsApi;
   constructor(private readonly appService: AppService) {}
 
   getCubeAPI(userToken?: string) {
     const token = this.getToken(userToken);
     this.cubejsApi = cubejs(token, {
+      // apiUrl: process.env.CUBE_API_URL_local,
       apiUrl: process.env.CUBE_API_URL,
     });
   }
@@ -24,7 +25,7 @@ export class AppController {
 
     const cubejsToken = sign(
       {
-        appId: 'insights',
+        appName: 'insights',
         role: 'anonymous',
       },
       CUBE_API_SECRET,
@@ -45,7 +46,7 @@ export class AppController {
 
     this.getCubeAPI(token);
 
-    const query = {
+    const query: Query = {
       limit: 10,
       dimensions: ['activities.organizationid'],
       order: {
@@ -53,6 +54,21 @@ export class AppController {
       },
     };
     const resultSet = await this.cubejsApi.load(query);
+    return { data: resultSet };
+  }
+  @Get('meta')
+  async meta(@Req() req) {
+    const accessToken = req.headers.authorization || '';
+
+    let token;
+
+    if (accessToken) {
+      token = accessToken.split(' ')[1];
+    }
+
+    this.getCubeAPI(token);
+
+    const resultSet = await this.cubejsApi.meta();
     return { data: resultSet };
   }
 }

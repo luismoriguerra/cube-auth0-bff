@@ -1,0 +1,13 @@
+{
+  "anonymous": ["public_cube"],
+  "authenticated": ["public_cube", "private_cube"],
+  "admin": ["*"],
+  "custom_company_admin": [
+    "public_cube",
+    "private_cube",
+    "{ we can define hardcoded filters based on the token}"
+  ],
+  "protected_columns": {
+    "protected_columns.id": "admin"
+  }
+}

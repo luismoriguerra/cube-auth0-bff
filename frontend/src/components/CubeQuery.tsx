@@ -17,7 +17,6 @@ export default function CubeQuery() {
       getAccessTokenSilently({
         authorizationParams: {
           audience: `cubejs-app`,
-          scope: "openid profile email phone address",
         },
       })
     );

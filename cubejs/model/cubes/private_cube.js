@@ -1,25 +1,13 @@
-cube(`members`, {
-  sql_table: `public.members`,
+cube(`private_cube`, {
+  sql: `select * from members limit 2`,
 
   data_source: `default`,
-
+  public:
+    COMPILE_CONTEXT.checkVisibility &&
+    COMPILE_CONTEXT.checkVisibility(`private_cube`),
   joins: {},
 
   dimensions: {
-    contributions: {
-      sql: `contributions`,
-      type: `string`,
-    },
-
-    attributes: {
-      sql: `attributes`,
-      type: `string`,
-    },
-
-    displayname: {
-      sql: `${CUBE}."displayName"`,
-      type: `string`,
-    },
     emails: {
       sql: `emails`,
       type: `string`,
@@ -43,3 +31,11 @@ cube(`members`, {
     // Learn more in the documentation: https://cube.dev/docs/caching/pre-aggregations/getting-started
   },
 });
+
+// view(`private_view`, {
+//   description: `private_view`,
+//   public:
+//     COMPILE_CONTEXT.checkVisibility &&
+//     COMPILE_CONTEXT.checkVisibility("private_view"),
+//   includes: [private_cube.id, private_cube.emails, private_cube.count],
+// });

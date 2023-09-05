@@ -7,7 +7,7 @@ let checkAuthMiddleware = async (req, auth) => {
   const { query: reqQuery } = req;
   const { query } = reqQuery;
   console.log({
-    msg: "req, auth",
+    msg: ":: checkAuthMiddleware",
     debug: {
       query,
       auth,
@@ -19,13 +19,15 @@ let checkAuthMiddleware = async (req, auth) => {
 
   try {
     securityContext = await cubeTokenVerify(auth);
+    securityContext.role = "anonymous";
   } catch (error) {
     securityContext = await verifyToken(auth);
+    securityContext.role = "authenticated";
   }
 
   // console.log({ msg: "checkAuth ::::::", securityContext });
   req.securityContext = securityContext;
-
+  console.log({ msg: "req.securityContext", debug: req.securityContext });
   return req;
 };
 

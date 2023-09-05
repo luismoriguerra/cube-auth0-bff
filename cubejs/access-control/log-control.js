@@ -1,7 +1,7 @@
 function logQuery(query, context) {
   console.log(
     JSON.stringify(
-      { msg: "{ query, context }", debug: { query, context } },
+      { msg: "::: log query rewrite", debug: { query, context } },
       null,
       2
     )
